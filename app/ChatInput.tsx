@@ -1,16 +1,42 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { v4 as uuid } from "uuid";
+import { Message } from "../typings";
 
 export default function ChatInput() {
   const [input, setInput] = useState("");
+
   function handleSendMessage(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
     if (!input) return;
     const messageToSend = input;
-    
-    setInput('')
+
+    setInput("");
+
+    const id = uuid();
+    const message: Message = {
+      id,
+      message: messageToSend,
+      created_at: Date.now(),
+      username: "Luca Alfaro Rampinelli",
+      profilePic:
+        "https://lh3.googleusercontent.com/a/ALm5wu2f9uNDMtewreE0JVAXep7WFYIywb9VhtVa3SFTJA=s83-c-mo",
+      email: "luca.alfaro.rampinelli@gmail.com",
+    };
+
+    const uploadMessageToUpstash = async () => {
+      const res = await fetch("/api/addMessage", {
+        method: "POST",
+        headers: {
+          "Constent-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+      const data = await res.json();
+    };
   }
+
   return (
     <form
       className="fixed w-full bottom-0 z-50 flex space-x-2 px-10 py-5
