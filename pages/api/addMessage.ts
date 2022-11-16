@@ -19,7 +19,7 @@ export default async function handler(
     }
 
     const { message } = req.body;
-
+    console.log(message)
     {/*
     Replace the timestamp of the user to the
     timestamp of the server
@@ -30,7 +30,7 @@ export default async function handler(
     }
 
     //Push new message to redis db
-    await redis.hset('messages', message.id, JSON.stringify(newMessage))
+    await redis.hset('messages', newMessage.id, JSON.stringify(newMessage))
 
     res.status(200).json({ message: newMessage })
 }

@@ -1,13 +1,32 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, use, useState } from "react";
+import useSWR from "swr";
 import { v4 as uuid } from "uuid";
 import { Message } from "../typings";
+import fetchMessages from "../utils/fetchMessages";
 
 export default function ChatInput() {
   const [input, setInput] = useState("");
+  const {
+    data: messages,
+    error,
+    mutate,
+  } = useSWR("/api/getMessages", fetchMessages);
 
-  function handleSendMessage(ev: FormEvent<HTMLFormElement>) {
+  async function uploadMessageToUpstash(message: Message) {
+    const data = await fetch("/api/addMessage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
+    }).then((res) => res.json());
+
+    return [data.message, ...messages!];
+  }
+
+  async function handleSendMessage(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
     if (!input) return;
     const messageToSend = input;
@@ -25,16 +44,10 @@ export default function ChatInput() {
       email: "luca.alfaro.rampinelli@gmail.com",
     };
 
-    const uploadMessageToUpstash = async () => {
-      const res = await fetch("/api/addMessage", {
-        method: "POST",
-        headers: {
-          "Constent-Type": "application/json",
-        },
-        body: JSON.stringify({ message }),
-      });
-      const data = await res.json();
-    };
+    await mutate(uploadMessageToUpstash(message),{
+      optimisticData:[message,...messages!],
+      rollbackOnError:true
+    });
   }
 
   return (
@@ -44,10 +57,7 @@ export default function ChatInput() {
       onSubmit={handleSendMessage}
     >
       <input
-        className="
-        flex-1 rounded border-gray-300 outline-none focus:ring-2 focus:ring-blue-600
-        focus:border-transparent px-5 py-3 disabled:opacity-50
-        disabled:cursor-not-allowed"
+        className=" flex-1 rounded border-2 border-gray-200 outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
         placeholder="Enter message here..."
         type="text"
         name="chat-input"
