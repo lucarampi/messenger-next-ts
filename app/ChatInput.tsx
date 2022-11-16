@@ -53,7 +53,7 @@ export default function ChatInput() {
   return (
     <form
       className="fixed w-full bottom-0 z-50 flex space-x-2 px-10 py-5
-    border-t border-gray-100 "
+    border-t border-gray-100 bg-white"
       onSubmit={handleSendMessage}
     >
       <input
