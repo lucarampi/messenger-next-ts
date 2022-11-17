@@ -14,4 +14,5 @@ export const authOptions = {
     signIn:'/auth/signin'
   }
 }
+console.log(authOptions)
 export default NextAuth(authOptions)

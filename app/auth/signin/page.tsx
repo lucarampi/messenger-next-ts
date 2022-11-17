@@ -1,9 +1,10 @@
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders } from "next-auth/react";
 import Image from "next/image";
 import SignInComponent from "./SignInComponent";
 
 export default async function Page() {
   const providers = await getProviders();
+  console.log('GET PROVIDERS >>>',providers)
   return (
     <div className="flex pt-8 space-y-10 flex-col items-center justify-center">
       <div >
