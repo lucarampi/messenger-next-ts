@@ -1,9 +1,9 @@
+import { axiosClient } from "../services/axios";
 import { Message } from "../typings";
 
 
 const fetcher = async () => {
-    const res = await fetch('/api/getMessages');
-    const data = await res.json();
+    const {data} = await axiosClient('/api/getMessages');
     const messages: Message[] = data.messages;
 
     return messages;
