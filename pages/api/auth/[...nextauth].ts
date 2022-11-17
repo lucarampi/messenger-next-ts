@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook"
 
-const authOptions = {
+export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     FacebookProvider({

@@ -17,7 +17,7 @@ export default function SignInComponent({ providers }: Props) {
             onClick={() => {
               console.log(provider);
               signIn(provider.id, {
-                callbackUrl: `https://localhost:3000`,
+                callbackUrl: process.env.VERCEL_URL,
               });
             }}
           >
