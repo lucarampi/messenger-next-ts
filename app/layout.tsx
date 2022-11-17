@@ -1,7 +1,8 @@
 import "../styles/globals.css";
 import Header from "./Header";
+import React from 'react';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -9,8 +10,8 @@ export default function RootLayout({
   return (
     <html>
       <body>
+      {/* @ts-expect-error */}
         <Header />
-
         {children}
       </body>
     </html>
