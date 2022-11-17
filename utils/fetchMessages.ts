@@ -3,7 +3,7 @@ import { Message } from "../typings";
 
 
 const fetcher = async () => {
-    const {data} = await axiosClient('/api/getMessages');
+    const {data} = await axiosClient.get('/api/getMessages');
     const messages: Message[] = data.messages;
 
     return messages;
