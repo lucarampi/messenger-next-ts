@@ -6,7 +6,7 @@ import Provider from "./Provider";
 import {unstable_getServerSession} from 'next-auth/next'
 
 export default async function HomePage() {
-  const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`).then(
+  const data = await fetch(`${'https://'+process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`).then(
     (res) => res.json()
   );
 
