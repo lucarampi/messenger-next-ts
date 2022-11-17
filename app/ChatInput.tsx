@@ -12,14 +12,13 @@ interface Props {
   session: Awaited<ReturnType<typeof unstable_getServerSession>>;
 }
 
-export default function ChatInput({session}:Props) {
+export default function ChatInput({ session }: Props) {
   const [input, setInput] = useState("");
   const {
     data: messages,
     error,
     mutate,
   } = useSWR("/api/getMessages", fetchMessages);
-
 
   async function uploadMessageToUpstash(message: Message) {
     const data = await fetch("/api/addMessage", {
@@ -47,10 +46,9 @@ export default function ChatInput({session}:Props) {
       id,
       message: messageToSend,
       created_at: Date.now(),
-      username: "Luca Alfaro Rampinelli",
-      profilePic:
-        "https://lh3.googleusercontent.com/a/ALm5wu2f9uNDMtewreE0JVAXep7WFYIywb9VhtVa3SFTJA=s83-c-mo",
-      email: "luca.alfaro.rampinelli@gmail.com",
+      username: session.user?.name!,
+      profilePic: session.user?.image!,
+      email: session.user?.email!,
     };
 
     await mutate(uploadMessageToUpstash(message), {

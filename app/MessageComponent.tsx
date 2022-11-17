@@ -1,12 +1,16 @@
 import Image from "next/image";
 import { Message } from "../typings";
+import { useSession } from "next-auth/react";
+
 
 interface MessageComponentProps {
   message: Message;
+  email: string;
+
 }
 
-export function MessageComponent({ message }: MessageComponentProps) {
-    const isUser = false;
+export function MessageComponent({ email,message }: MessageComponentProps) {
+    const isUser = email === message.email;
   return (
     <div className={`flex w-fit ${isUser && 'ml-auto'}`}>
       <div className={`flex-shrink-0 ${isUser && 'order-2'}`}>

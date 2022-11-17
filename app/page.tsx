@@ -18,7 +18,7 @@ export default async function HomePage() {
   return (
     <Provider session={session}>
       <main>
-        <MessageList initialMessages={messages} />
+        <MessageList  session={session} initialMessages={messages}  />
         <ChatInput session={session} />
       </main>
     </Provider>
