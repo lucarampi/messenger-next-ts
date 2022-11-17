@@ -6,13 +6,20 @@ import { v4 as uuid } from "uuid";
 import { Message } from "../typings";
 import fetchMessages from "../utils/fetchMessages";
 
-export default function ChatInput() {
+import { unstable_getServerSession } from "next-auth/next";
+
+interface Props {
+  session: Awaited<ReturnType<typeof unstable_getServerSession>>;
+}
+
+export default function ChatInput({session}:Props) {
   const [input, setInput] = useState("");
   const {
     data: messages,
     error,
     mutate,
   } = useSWR("/api/getMessages", fetchMessages);
+
 
   async function uploadMessageToUpstash(message: Message) {
     const data = await fetch("/api/addMessage", {
@@ -29,6 +36,8 @@ export default function ChatInput() {
   async function handleSendMessage(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
     if (!input) return;
+    if (!session) return;
+
     const messageToSend = input;
 
     setInput("");
@@ -44,9 +53,9 @@ export default function ChatInput() {
       email: "luca.alfaro.rampinelli@gmail.com",
     };
 
-    await mutate(uploadMessageToUpstash(message),{
-      optimisticData:[message,...messages!],
-      rollbackOnError:true
+    await mutate(uploadMessageToUpstash(message), {
+      optimisticData: [message, ...messages!],
+      rollbackOnError: true,
     });
   }
 
@@ -60,6 +69,7 @@ export default function ChatInput() {
         className=" flex-1 rounded border-2 border-gray-200 outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
         placeholder="Enter message here..."
         type="text"
+        disabled={!session}
         name="chat-input"
         id="chat-input"
         onChange={(e) => setInput(e.target.value)}
