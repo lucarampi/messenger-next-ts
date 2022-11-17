@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook"
-export const authOptions = {
+
+const authOptions = {
   // Configure one or more authentication providers
   providers: [
     FacebookProvider({
@@ -9,10 +10,11 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-  secret:process.env.NEXT_PUBLIC_SECRET!,
-  pages:{
-    signIn:'/auth/signin'
+  secret: process.env.NEXT_PUBLIC_SECRET!,
+  pages: {
+    signIn: '/auth/signin'
   }
 }
-console.log(authOptions)
+console.log('SERVER: AUTH OPTIONS >>>', authOptions)
+
 export default NextAuth(authOptions)

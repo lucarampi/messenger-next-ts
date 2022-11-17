@@ -20,7 +20,7 @@ export default async function handler(
     }
 
     const { message } = req.body;
-    console.log(message)
+    console.log('API: ADD MESSAGE >>>',message)
     {/*
     Replace the timestamp of the user to the
     timestamp of the server
