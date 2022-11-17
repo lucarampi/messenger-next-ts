@@ -12,7 +12,8 @@ const authOptions = {
   ],
   secret: process.env.NEXT_PUBLIC_SECRET!,
   pages: {
-    signIn: '/auth/signin'
+    signIn: '/auth/signin',
+    newUser: '/auth/new-user'
   }
 }
 console.log('SERVER: AUTH OPTIONS >>>', authOptions)

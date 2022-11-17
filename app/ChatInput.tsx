@@ -7,6 +7,7 @@ import { Message } from "../typings";
 import fetchMessages from "../utils/fetchMessages";
 
 import { unstable_getServerSession } from "next-auth/next";
+import { axiosClient } from "../services/axios";
 
 interface Props {
   session: Awaited<ReturnType<typeof unstable_getServerSession>>;
@@ -21,13 +22,8 @@ export default function ChatInput({ session }: Props) {
   } = useSWR("/api/getMessages", fetchMessages);
 
   async function uploadMessageToUpstash(message: Message) {
-    const data = await fetch("/api/addMessage", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message }),
-    }).then((res) => res.json());
+    const {data} = await axiosClient.post("/api/addMessage",{ message })
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',data)
 
     return [data.message, ...messages!];
   }

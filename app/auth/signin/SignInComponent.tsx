@@ -6,19 +6,20 @@ interface Props {
 }
 
 export default function SignInComponent({ providers }: Props) {
-  const error = [{name:'error', id:'error'}]
+  const error = [{ name: "error", id: "error" }];
 
   return (
     <div>
-      {(Object.values(providers! || error)).map((provider) => (
+      {Object.values(providers! || error).map((provider) => (
         <div key={provider.name}>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all"
-            onClick={() =>
+            onClick={() => {
+              console.log(provider);
               signIn(provider.id, {
-                callbackUrl: `${process.env.VERCEL_URL}`,
-              })
-            }
+                callbackUrl: `https://localhost:3000`,
+              });
+            }}
           >
             Sign in with {provider.name}
           </button>
