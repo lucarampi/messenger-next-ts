@@ -13,7 +13,7 @@ export const authOptions = {
   secret: process.env.NEXT_PUBLIC_SECRET!,
   pages: {
     signIn: '/auth/signin',
-    newUser: '/auth/new-user'
+    newUser: '/auth/signin'
   }
 }
 console.log('SERVER: AUTH OPTIONS >>>', authOptions)
