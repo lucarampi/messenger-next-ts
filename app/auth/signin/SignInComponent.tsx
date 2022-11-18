@@ -7,7 +7,7 @@ interface Props {
 
 export default function SignInComponent({ providers }: Props) {
   const error = [{ name: "error", id: "error" }];
-
+    console.log('VERCEL URL >>>',process.env.VERCEL_URL)
   return (
     <div>
       {Object.values(providers! || error).map((provider) => (
