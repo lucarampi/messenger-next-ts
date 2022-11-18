@@ -7,7 +7,6 @@ interface Props {
 
 export default function SignInComponent({ providers }: Props) {
   const error = [{ name: "error", id: "error" }];
-    console.log('VERCEL URL >>>',process.env.VERCEL_URL)
   return (
     <div>
       {Object.values(providers! || error).map((provider) => (
@@ -16,6 +15,8 @@ export default function SignInComponent({ providers }: Props) {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all"
             onClick={() => {
               console.log(provider);
+              console.log("VERCEL URL >>>", process.env.VERCEL_URL);
+
               signIn(provider.id, {
                 callbackUrl: process.env.VERCEL_URL,
               });
