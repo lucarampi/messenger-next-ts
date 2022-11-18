@@ -7,8 +7,8 @@ import { unstable_getServerSession } from "next-auth/next";
 import { axiosClient } from "../services/axios";
 
 export default async function HomePage() {
-  const {data} = await axiosClient.get("/api/getMessages");
-  const messages: Message[] = data.messages || [];
+  // const {data} = await axiosClient.get("/api/getMessages");
+  const messages: Message[] = [];
 
   const session = await unstable_getServerSession();
 
