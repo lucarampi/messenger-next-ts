@@ -17,5 +17,7 @@ export const authOptions = {
   }
 }
 console.log('SERVER: AUTH OPTIONS >>>', authOptions)
+console.log("VERCEL URL >>>", process.env.VERCEL_URL);
+
 
 export default NextAuth(authOptions)
