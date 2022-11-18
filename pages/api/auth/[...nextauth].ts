@@ -10,14 +10,13 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-  secret: process.env.NEXT_PUBLIC_SECRET!,
+  // secret: process.env.NEXT_PUBLIC_SECRET!,
   pages: {
     signIn: '/auth/signin',
-    newUser: '/auth/signin'
   }
 }
 console.log('SERVER: AUTH OPTIONS >>>', authOptions)
-console.log("VERCEL URL >>>", process.env.VERCEL_URL);
+// console.log("VERCEL URL >>>", process.env.VERCEL_URL);
 
 
 export default NextAuth(authOptions)

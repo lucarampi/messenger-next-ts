@@ -23,7 +23,7 @@ export default async function handler(
     const messages: Message[] = messagesRes.map((message: string) => JSON.parse(message))
     const messagesSorted = messages.sort((a, b) => b.created_at - a.created_at)
 
-    console.log('API: GET MESSAGES >>>',messagesSorted)
+    // console.log('API: GET MESSAGES >>>',messagesSorted)
 
     res.status(200).json({ messages: messagesSorted })
 }

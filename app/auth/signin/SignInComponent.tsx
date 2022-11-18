@@ -1,5 +1,5 @@
 "use client";
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders, signIn, useSession } from "next-auth/react";
 
 interface Props {
   providers: Awaited<ReturnType<typeof getProviders>>;
@@ -7,6 +7,8 @@ interface Props {
 
 export default function SignInComponent({ providers }: Props) {
   const error = [{ name: "error", id: "error" }];
+  // const {data} = useSession()
+  // console.log('DATA FROM SIGNIN COMPONENT >>>',data)
   return (
     <div>
       {Object.values(providers! || error).map((provider) => (
