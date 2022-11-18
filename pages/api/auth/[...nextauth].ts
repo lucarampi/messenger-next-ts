@@ -1,7 +1,7 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook"
 
-export const authOptions = {
+export const authOptions:NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     FacebookProvider({
@@ -13,6 +13,16 @@ export const authOptions = {
   // secret: process.env.NEXT_PUBLIC_SECRET!,
   pages: {
     signIn: '/auth/signin',
+  },
+  callbacks:{
+    // async redirect({ url, baseUrl }) {
+    //   console.log('REDIRECT CALLBACK!', url,baseUrl)
+    //   // Allows relative callback URLs
+    //   if (url.startsWith("/")) return `${baseUrl}${url}`
+    //   // Allows callback URLs on the same origin
+    //   else if (new URL(url).origin === baseUrl) return url
+    //   return baseUrl
+    // }
   }
 }
 console.log('SERVER: AUTH OPTIONS >>>', authOptions)
