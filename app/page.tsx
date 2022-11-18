@@ -8,7 +8,7 @@ import { axiosClient } from "../services/axios";
 
 export default async function HomePage() {
   const {data} = await axiosClient.get("/api/getMessages");
-  const messages: Message[] = data.messages;
+  const messages: Message[] = data.messages || [];
 
   const session = await unstable_getServerSession();
 
