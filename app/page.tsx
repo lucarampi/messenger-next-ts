@@ -4,13 +4,11 @@ import MessageList from "./MessageList";
 import Provider from "./Provider";
 
 import { unstable_getServerSession } from "next-auth/next";
-import { axiosClient } from "../services/axios";
+import getMessages from "../utils/fetchMessages";
 
 export default async function HomePage() {
-  const { data } = await axiosClient.get("/api/getMessages");
-  const messages: Message[] = data.message || [];
-  console.log(process.env.VERCEL_URL);
   const session = await unstable_getServerSession();
+  const messages: Message[] = session ? await getMessages() : [];
 
   return (
     <Provider session={session}>
