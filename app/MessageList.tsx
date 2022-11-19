@@ -42,7 +42,7 @@ export default function MessageList({ session, initialMessages }: Props) {
   return (
     <div className="space-y-5 transition-colors px-5 pt-8 pb-32 max-w-2xl xl:max-w-6xl mx-auto">
       {(messages || initialMessages).map((message) => (
-        <MessageComponent key={message.id} email={session?.user?.email!} message={message} />
+        <MessageComponent key={message.id} session={session!} message={message} />
       ))}
     </div>
   );
