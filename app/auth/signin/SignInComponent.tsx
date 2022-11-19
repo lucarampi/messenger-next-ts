@@ -1,6 +1,5 @@
 "use client";
-import { getProviders, signIn, useSession } from "next-auth/react";
-import { ButtonHTMLAttributes, HTMLAttributes } from "react";
+import { getProviders, signIn } from "next-auth/react";
 import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
@@ -10,8 +9,8 @@ interface Props {
 
 export default function SignInComponent({ providers }: Props) {
   const error = [{ name: "error", id: "error" }];
-  // const {data} = useSession()
-  // console.log('DATA FROM SIGNIN COMPONENT >>>',data)
+  
+  
 
   return (
     <div className="flex flex-col gap-3">
