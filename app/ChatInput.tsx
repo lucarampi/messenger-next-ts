@@ -21,7 +21,7 @@ export default function ChatInput({ session }: Props) {
     mutate,
   } = useSWR("/api/getMessages", fetchMessages);
 
-  console.log('SESSION FOROM CHATINPUT >>>',session)
+  // console.log('SESSION FOROM CHATINPUT >>>',session)
 
   async function uploadMessageToUpstash(message: Message) {
     const {data} = await axiosClient.post("/api/addMessage",{ message })

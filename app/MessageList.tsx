@@ -21,7 +21,7 @@ export default function MessageList({ session, initialMessages }: Props) {
   } = useSWR<Message[]>("/api/getMessages", fetchMessages);
 
   useEffect(() => {
-    console.log('SESSION FROM MESAGELIST >>>',session)
+    // console.log('SESSION FROM MESAGELIST >>>',session)
     const channel = clientPusher.subscribe("messages");
     channel.bind("new-message", async (data: Message) => {
       if (messages?.find((message) => message.id === data.id)) return;

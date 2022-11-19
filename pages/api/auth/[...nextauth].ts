@@ -30,7 +30,7 @@ export const authOptions:NextAuthOptions = {
     // }
   }
 }
-console.log('SERVER: AUTH OPTIONS >>>', authOptions)
+// console.log('SERVER: AUTH OPTIONS >>>', authOptions)
 // console.log("VERCEL URL >>>", process.env.VERCEL_URL);
 
 
