@@ -11,19 +11,19 @@ interface MessageComponentProps {
 export function MessageComponent({ email, message }: MessageComponentProps) {
   const isUser = email === message.email;
   return (
-    <div className={`flex w-fit ${isUser && "ml-auto"}`}>
-      <div className={`flex-shrink-0 ${isUser && "order-2"}`}>
+    <div className={`flex w-fit items-end ${isUser ? "ml-auto" : ''}`}>
+      <div className={`flex-shrink-0 ${isUser ? "order-2": ''}`}>
         <Image
           src={message.profilePic}
           alt="Profile image"
-          height={10}
+          height={20}
           width={50}
-          className="rounded-full mx-2  w-auto h-auto"
+          className="rounded-full object-contain mx-2"
         />
       </div>
       <div>
         <p
-          className={`text-xs px-0.5 pb-0.5  ${
+          className={`text-xs px-0.5 pb-0.5 ${
             isUser ? "text-blue-400 text-right" : "text-red-400 text-left"
           }`}
         >

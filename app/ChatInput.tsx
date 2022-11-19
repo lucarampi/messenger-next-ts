@@ -8,6 +8,7 @@ import fetchMessages from "../utils/fetchMessages";
 
 import { unstable_getServerSession } from "next-auth/next";
 import { axiosClient } from "../services/axios";
+import {PaperPlaneRight} from 'phosphor-react'
 
 interface Props {
   session: Awaited<ReturnType<typeof unstable_getServerSession>>;
@@ -24,7 +25,7 @@ export default function ChatInput({ session }: Props) {
   // console.log('SESSION FOROM CHATINPUT >>>',session)
 
   async function uploadMessageToUpstash(message: Message) {
-    const {data} = await axiosClient.post("/api/addMessage",{ message })
+    const { data } = await axiosClient.post("/api/addMessage", { message });
 
     return [data.message, ...messages!];
   }
@@ -56,13 +57,14 @@ export default function ChatInput({ session }: Props) {
 
   return (
     <form
-      className="fixed w-full bottom-0 z-50 flex space-x-2 px-10 py-5
-    border-t border-gray-100 bg-white"
+      className="fixed w-full bottom-0 z-50 flex space-x-4 px-10 py-5 border-t bg-white"
       onSubmit={handleSendMessage}
     >
       <input
         className=" flex-1 rounded border-2 border-gray-200 outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
         placeholder="Enter message here..."
+        autoComplete='off'
+        autoCorrect="on"
         type="text"
         disabled={!session}
         name="chat-input"
@@ -77,7 +79,7 @@ export default function ChatInput({ session }: Props) {
         type="submit"
         disabled={!input}
       >
-        Send
+        <PaperPlaneRight size={24} />
       </button>
     </form>
   );

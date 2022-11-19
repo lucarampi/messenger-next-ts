@@ -7,7 +7,7 @@ export default function LogoutButton() {
   return (
     <button
       type="button"
-      className="hover:text-blue-700 text-gray-200  transition-all"
+      className="hover:text-blue-700 text-gray-400  transition-all"
       onClick={() => signOut()}
     >
       <IoLogOutOutline size={22}/>
