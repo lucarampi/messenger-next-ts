@@ -39,7 +39,7 @@ export default async function Header() {
       <div className="flex flex-col items-center space-y-5">
         <div className="flex space-x-2 items-center">
           <Image src="/logo-meta.png" alt="logo" height={10} width={50} />
-          <p className="text-blue-500">Welcome to Meta Messenger</p>
+          <p className="text-blue-500">Welcome to Earth Messenger</p>
         </div>
       </div>
     </header>

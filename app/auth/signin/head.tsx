@@ -1,7 +1,7 @@
 export default function Head(){
   return(
     <title>
-        Sign in to Messenger
+        Sign in to Earth Messenger
     </title>
   );
 }
