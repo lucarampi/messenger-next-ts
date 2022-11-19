@@ -1,16 +1,16 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-
+import {IoLogOutOutline} from 'react-icons/io5'
 
 export default function LogoutButton() {
   return (
     <button
       type="button"
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all"
+      className="bg-gray-200 hover:bg-gray-700 text-gray-500 hover:text-white font-bold py-2 px-4 rounded transition-all"
       onClick={() => signOut()}
     >
-      Sign out
+      <IoLogOutOutline size={22}/>
     </button>
   );
 }
