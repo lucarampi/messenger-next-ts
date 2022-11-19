@@ -9,7 +9,7 @@ import { axiosClient } from "../services/axios";
 export default async function HomePage() {
   // const {data} = await axiosClient.get("/api/getMessages");
   const messages: Message[] = [];
-
+  console.log(process.env.VERCEL_URL)
   const session = await unstable_getServerSession();
 
   return (

@@ -2,7 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["platform-lookaside.fbsbx.com","lh3.googleusercontent.com"]
+    domains: ["platform-lookaside.fbsbx.com",'scontent-gru1-2.xx.fbcdn.net',"lh3.googleusercontent.com"]
   },
   experimental: {
     appDir: true
