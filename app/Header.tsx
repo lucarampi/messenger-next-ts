@@ -15,7 +15,7 @@ export default async function Header() {
 
   if (session)
     return (
-      <header className="flex justify-between items-center p-10 shadow-sm sticky top-0 z-50 bg-white lex">
+      <header className="flex justify-between items-center px-10 py-7 shadow-md shadow-slate-200 sticky top-0 z-50 bg-white lex">
         <div className="flex flex-col items-center space-y-5">
           <div className="flex space-x-2">
             <Image
@@ -35,7 +35,7 @@ export default async function Header() {
       </header>
     );
   return (
-    <header className="flex justify-center items-center p-10 shadow-sm sticky top-0 z-50 bg-white lex">
+    <header className="flex justify-center items-center px-10 py-7 shadow-md shadow-slate-200 sticky top-0 z-50 bg-white lex">
       <div className="flex flex-col items-center space-y-5">
         <div className="flex space-x-2 items-center">
           <Image src="/logo-meta.png" alt="logo" height={10} width={50} />
