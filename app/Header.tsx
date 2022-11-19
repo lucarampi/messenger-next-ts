@@ -15,15 +15,15 @@ export default async function Header() {
 
   if (session)
     return (
-      <header className="flex justify-between items-center px-10 py-1 shadow-md shadow-slate-200 sticky top-0 z-50 bg-white lex">
+      <header className="flex justify-between items-center px-10 py-4 shadow-md shadow-slate-200 sticky top-0 z-50 bg-white lex">
         <div className="flex flex-col items-center space-y-5">
           <div className="flex space-x-2">
             <Image
               className="rounded-full mx-2 object-contain w-auto h-auto"
               src={session.user?.image!}
               alt="profile picture"
-              height={10}
-              width={50}
+              height={7}
+              width={35}
             />
             <div>
               <p className="text-blue-400">Logged in as:</p>
