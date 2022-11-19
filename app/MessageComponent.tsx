@@ -18,7 +18,7 @@ export function MessageComponent({ email, message }: MessageComponentProps) {
           alt="Profile image"
           height={10}
           width={50}
-          className="rounded-full mx-2"
+          className="rounded-full mx-2  w-auto h-auto"
         />
       </div>
       <div>
