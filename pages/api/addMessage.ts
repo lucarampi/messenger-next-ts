@@ -20,19 +20,25 @@ export default async function handler(
     }
 
     const { message } = req.body;
-    // console.log('API: ADD MESSAGE>>>',message)
+
     {/*
     Replace the timestamp of the user to the
     timestamp of the server
     */}
+
     const newMessage: Message = {
         ...message,
         created_at: Date.now()
     }
 
+    if (newMessage.message.length > 250) {
+        res.status(403).json({ body: 'Nope, but nice try... The max lenth is 250, deal with it! ' })
+        return;
+    }
+
     //Push new message to redis db
     await redis.hset('messages', newMessage.id, JSON.stringify(newMessage));
-    serverPusher.trigger("messages",'new-message', newMessage);
+    serverPusher.trigger("messages", 'new-message', newMessage);
 
     res.status(200).json({ message: newMessage })
 }
