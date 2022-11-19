@@ -8,13 +8,14 @@ import fetchMessages from "../utils/fetchMessages";
 
 import { unstable_getServerSession } from "next-auth/next";
 import { axiosClient } from "../services/axios";
-import {PaperPlaneRight} from 'phosphor-react'
+import { PaperPlaneRight } from "phosphor-react";
 
 interface Props {
   session: Awaited<ReturnType<typeof unstable_getServerSession>>;
 }
 
 export default function ChatInput({ session }: Props) {
+  const MAX_LENGTH = 250;
   const [input, setInput] = useState("");
   const {
     data: messages,
@@ -34,6 +35,15 @@ export default function ChatInput({ session }: Props) {
     ev.preventDefault();
     if (!input) return;
     if (!session) return;
+    if (input.length > MAX_LENGTH) {
+      alert(
+        `You will need to do more than this my dear ${
+          session.user?.name?.split(" ")[0]
+        }...`
+      );
+      setInput((old) => old.slice(0, MAX_LENGTH));
+      return;
+    }
 
     const messageToSend = input;
 
@@ -60,18 +70,29 @@ export default function ChatInput({ session }: Props) {
       className="fixed w-full bottom-0 z-50 flex space-x-4 px-10 py-5 border-t bg-white"
       onSubmit={handleSendMessage}
     >
-      <input
-        className=" flex-1 rounded border-2 border-gray-200 outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
-        placeholder="Enter message here..."
-        autoComplete='off'
-        autoCorrect="on"
-        type="text"
-        disabled={!session}
-        name="chat-input"
-        id="chat-input"
-        onChange={(e) => setInput(e.target.value)}
-        value={input}
-      />
+      <div className="flex w-full relative">
+        <input
+          className=" flex-1 rounded border-2 border-gray-200 outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+          placeholder="Enter message here..."
+          autoComplete="off"
+          autoCorrect="on"
+          type="text"
+          disabled={!session}
+          name="chat-input"
+          id="chat-input"
+          onChange={(e) => setInput(e.target.value)}
+          value={input}
+          maxLength={MAX_LENGTH}
+        />
+        <span
+          className={`absolute text-xs bottom-1 right-2 ${
+            input.length < MAX_LENGTH ? "text-gray-400" : "text-red-400"
+          }  `}
+        >
+          {" "}
+          {input.length}/{MAX_LENGTH}
+        </span>
+      </div>
       <button
         className="
         bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4
