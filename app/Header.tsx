@@ -22,8 +22,8 @@ export default async function Header() {
               className="rounded-full mx-2 object-contain w-auto h-auto"
               src={session.user?.image!}
               alt="profile picture"
-              height={7}
-              width={35}
+              height={10}
+              width={50}
             />
             <div>
               <p className="text-blue-400">Logged in as:</p>
